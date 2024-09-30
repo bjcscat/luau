@@ -45,6 +45,9 @@ struct lua_CompileOptions
 
     // null-terminated array of userdata types that will be included in the type information
     const char* const* userdataTypes;
+
+    // null-terminated array of attributes which will be accepted by the compiler (does not include builtin attributes like @native or @checked)
+    const char* const* knownAttributes;
 };
 
 // compile source to bytecode; when source compilation fails, the resulting bytecode contains the encoded error. use free() to destroy

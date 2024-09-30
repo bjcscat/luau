@@ -208,6 +208,7 @@ public:
     {
         Checked,
         Native,
+        RuntimeDefined
     };
 
     AstAttr(const Location& location, Type type);

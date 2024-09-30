@@ -49,6 +49,9 @@ struct CompileOptions
 
     // null-terminated array of userdata types that will be included in the type information
     const char* const* userdataTypes = nullptr;
+
+    // this is not used and only exists for parity with the C side
+    const char* const* knownAttributes = nullptr;
 };
 
 class CompileError : public std::exception

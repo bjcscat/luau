@@ -17,7 +17,21 @@ char* luau_compile(const char* source, size_t size, lua_CompileOptions* options,
         memcpy(static_cast<void*>(&opts), options, sizeof(opts));
     }
 
-    std::string result = compile(std::string(source, size), opts);
+    Luau::ParseOptions parseOpts;
+
+    if (options && options->knownAttributes)
+    {
+        std::vector<const char*> knownAttributes;
+
+        for (const char* const * p = options->knownAttributes;*p;p++)
+        {
+            knownAttributes.push_back(*p);
+        }
+
+        parseOpts.knownAttributes = std::move(knownAttributes);
+    }
+
+    std::string result = compile(std::string(source, size), opts, parseOpts);
 
     char* copy = static_cast<char*>(malloc(result.size()));
     if (!copy)

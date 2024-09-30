@@ -719,6 +719,19 @@ std::pair<bool, AstAttr::Type> Parser::validateAttribute(const char* attributeNa
         }
     }
 
+    if (this->options.knownAttributes && !found)
+    {
+        for (const char *knownAttribute : this->options.knownAttributes.value())
+        {
+            if (strcmp(attributeName, knownAttribute))
+                continue;
+
+            type = AstAttr::Type::RuntimeDefined;
+            found = true;
+            break;
+        }
+    }
+
     if (!found)
     {
         if (strlen(attributeName) == 1)
